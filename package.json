@@ -1,0 +1,28 @@
+{
+  "name": "inventorysystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@types/node": "^12.12.31",
+    "express": "^4.17.1",
+    "inversify": "^5.0.1",
+    "inversify-express-utils": "^6.3.2",
+    "mssql": "^6.2.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.24"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.3",
+    "@types/node": "^12.12.31",
+    "ts-node": "3.3.0",
+    "tslint": "^6.1.0",
+    "typescript": "3.3.3333"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
