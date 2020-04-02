@@ -62,10 +62,12 @@ var CartController = /** @class */ (function () {
      * Creates an instance of cart controller.
      * @param cartRepository
      * @param productRepository
+     * @param loggerService
      */
-    function CartController(cartRepository, productRepository) {
+    function CartController(cartRepository, productRepository, loggerService) {
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
+        this.loggerService = loggerService;
     }
     /**
      * Https get
@@ -91,6 +93,7 @@ var CartController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_1 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_1));
                         res.status(400).json(error_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -105,7 +108,7 @@ var CartController = /** @class */ (function () {
      */
     CartController.prototype.postCart = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var product, user, cart, prod, result, error_2;
+            var product, user, cart, prod, result, errorMessage, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -128,11 +131,15 @@ var CartController = /** @class */ (function () {
                         res.status(200).json(result);
                         return [3 /*break*/, 4];
                     case 3:
-                        res.status(400).json('Product stock is very less');
+                        errorMessage = 'Product stock is very less';
+                        this.loggerService.logError(errorMessage);
+                        res.status(400).json(errorMessage);
                         _a.label = 4;
                     case 4: return [3 /*break*/, 6];
                     case 5:
                         error_2 = _a.sent();
+                        console.log(error_2);
+                        this.loggerService.logError(JSON.stringify(error_2));
                         res.status(400).json(error_2);
                         return [3 /*break*/, 6];
                     case 6: return [2 /*return*/];
@@ -170,6 +177,8 @@ var CartController = /** @class */ (function () {
                     case 4: return [3 /*break*/, 6];
                     case 5:
                         error_3 = _a.sent();
+                        console.log(error_3);
+                        this.loggerService.logError(JSON.stringify(error_3));
                         res.status(400).json(error_3);
                         return [3 /*break*/, 6];
                     case 6: return [2 /*return*/];
@@ -202,7 +211,8 @@ var CartController = /** @class */ (function () {
         inversify_express_utils_1.controller('/carts'),
         __param(0, inversify_1.inject(types_1.default.ICartRepository)),
         __param(1, inversify_1.inject(types_1.default.IProductRepository)),
-        __metadata("design:paramtypes", [Object, Object])
+        __param(2, inversify_1.inject(types_1.default.ILoggerService)),
+        __metadata("design:paramtypes", [Object, Object, Object])
     ], CartController);
     return CartController;
 }());

@@ -8,11 +8,11 @@ var user_entity_1 = require("./../entities/user.entity");
 require("reflect-metadata");
 exports.dbOptions = {
     type: "mssql",
-    host: "SPANNIAN01\\MSSQLSERVER1",
-    port: 8391,
-    username: "sa",
-    password: "shijil@123",
-    database: "Inventory",
+    host: process.env.HOST,
+    port: +process.env.DB_PORT,
+    username: process.env.USER_NAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE_NAME,
     entities: [user_entity_1.User, product_entity_1.Product, cart_entity_1.Cart, order_entity_1.Order, order_item_entity_1.OrderItem],
     synchronize: true,
 };

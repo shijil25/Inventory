@@ -1,9 +1,10 @@
+import { ILoggerService } from './../interfaces/ilogger.service';
 import * as express from 'express';
 import { interfaces, controller, httpGet, request, response, httpPost, httpPut, httpDelete } from 'inversify-express-utils';
 import { inject } from 'inversify';
 import TYPES from '../ioc/types';
 import { Product } from '../entities/product.entity';
-import { IProductRepository } from './../repositories/iproduct.repository';
+import { IProductRepository } from '../interfaces/iproduct.repository';
 
 /**
  * Product Controller
@@ -12,13 +13,16 @@ import { IProductRepository } from './../repositories/iproduct.repository';
 export class ProductController implements interfaces.Controller {
 
     private productRepository : IProductRepository;
+    private loggerService : ILoggerService;
 
     /**
      * Creates an instance of product controller.
      * @param productRepository 
      */
-    constructor(@inject(TYPES.IProductRepository) productRepository : IProductRepository) {
+    constructor(@inject(TYPES.IProductRepository) productRepository : IProductRepository,
+                @inject(TYPES.ILoggerService) loggerService : ILoggerService) {
         this.productRepository = productRepository;
+        this.loggerService = loggerService;
     }
 
     /**
@@ -36,6 +40,7 @@ export class ProductController implements interfaces.Controller {
                 res.status(200).json(product);
             }
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }
@@ -55,6 +60,7 @@ export class ProductController implements interfaces.Controller {
                 res.status(200).json(product);
             }
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }
@@ -76,6 +82,7 @@ export class ProductController implements interfaces.Controller {
             const newproduct = await this.productRepository.create(product);
             res.status(200).json(newproduct);
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }
@@ -101,6 +108,7 @@ export class ProductController implements interfaces.Controller {
                 res.status(400).json('Something went wrong');
             }
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }
@@ -122,6 +130,7 @@ export class ProductController implements interfaces.Controller {
                 res.status(400).json('Something went wrong');
             }
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }

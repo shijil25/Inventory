@@ -1,7 +1,7 @@
 import { getManager } from "typeorm";
 import { injectable } from "inversify";
 import { User } from './../entities/user.entity';
-import { IUserRepository } from './iuser.repository';
+import { IUserRepository } from '../interfaces/iuser.repository';
 
 /**
  * User Repository

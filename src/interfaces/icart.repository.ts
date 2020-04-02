@@ -1,4 +1,4 @@
-import { Cart } from './../entities/cart.entity';
+import { Cart } from '../entities/cart.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
 
 

@@ -1,9 +1,10 @@
+import { ILoggerService } from './../interfaces/ilogger.service';
 import * as express from 'express';
 import { interfaces, controller, httpGet, request, response, httpPost, httpPut, httpDelete } from 'inversify-express-utils';
 import { inject } from 'inversify';
 import TYPES from '../ioc/types';
 import { User } from './../entities/user.entity';
-import { IUserRepository } from './../repositories/iuser.repository';
+import { IUserRepository } from '../interfaces/iuser.repository';
 
 /**
  * User Controller
@@ -12,13 +13,16 @@ import { IUserRepository } from './../repositories/iuser.repository';
 export class UserController implements interfaces.Controller {
 
     private userRepository : IUserRepository;
+    private loggerService : ILoggerService;
 
     /**
      * Creates an instance of user controller.
      * @param userRepository 
      */
-    constructor(@inject(TYPES.IUserRepository) userRepository : IUserRepository) {
+    constructor(@inject(TYPES.IUserRepository) userRepository : IUserRepository,
+                @inject(TYPES.ILoggerService) loggerService : ILoggerService) {
         this.userRepository = userRepository;
+        this.loggerService = loggerService;
     }
 
     /**
@@ -36,6 +40,7 @@ export class UserController implements interfaces.Controller {
                 res.status(200).json(users);
             }
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }
@@ -55,6 +60,7 @@ export class UserController implements interfaces.Controller {
                 res.status(200).json(user);
             }
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }
@@ -78,6 +84,7 @@ export class UserController implements interfaces.Controller {
             const users = await this.userRepository.create(user);
             res.status(200).json(users);
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }
@@ -102,9 +109,12 @@ export class UserController implements interfaces.Controller {
             if(result) {
                 res.status(200).json(req.body);
             } else {
-                res.status(400).json('Something went wrong');
+                let message = 'Something went wrong'
+                this.loggerService.logError(message);
+                res.status(400).json(message);
             }
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }
@@ -123,9 +133,12 @@ export class UserController implements interfaces.Controller {
             if(result) {
                 res.status(200).json('Successfully deleted!');
             } else {
-                res.status(400).json('Something went wrong');
+                let message = 'Something went wrong'
+                this.loggerService.logError(message);
+                res.status(400).json(message);
             }
         } catch(error) {
+            this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
         }
     }

@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import * as express from 'express';
+require('dotenv').config();
 import { InversifyExpressServer } from 'inversify-express-utils';
 import * as bodyParser from "body-parser";
 import {createConnection} from "typeorm";
@@ -18,7 +19,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set("port", 8080);
+
+app.set("port", process.env.PORT || 8080);
 
 /**
  * Wrapper for express server
@@ -46,4 +48,7 @@ createConnection(appConfig.dbOptions).then(async connection => {
     console.log("Connected to DB");
 }).catch(error => console.log("TypeORM connection error: ", error));
 
-module.exports = app;
+/**
+ * export app
+ */
+module.exports = app; 

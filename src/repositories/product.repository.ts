@@ -1,7 +1,7 @@
 import { getManager } from "typeorm";
 import { injectable } from "inversify";
 import { Product } from './../entities/product.entity';
-import { IProductRepository } from './iproduct.repository';
+import { IProductRepository } from '../interfaces/iproduct.repository';
 
 /**
  * Product Repository

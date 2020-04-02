@@ -1,7 +1,7 @@
+import { ICartRepository } from './../interfaces/icart.repository';
 import { getManager } from "typeorm";
 import { injectable } from "inversify";
 import { Cart } from './../entities/cart.entity';
-import { ICartRepository } from './icart.repository';
 
 /**
  * Cart Repository

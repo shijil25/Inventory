@@ -38,6 +38,7 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 var express = require("express");
+require('dotenv').config();
 var inversify_express_utils_1 = require("inversify-express-utils");
 var bodyParser = require("body-parser");
 var typeorm_1 = require("typeorm");
@@ -53,7 +54,7 @@ var app = express();
  */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set("port", 8080);
+app.set("port", process.env.PORT || 8080);
 /**
  * Wrapper for express server
  */
@@ -79,5 +80,8 @@ typeorm_1.createConnection(appConfig.dbOptions).then(function (connection) { ret
         return [2 /*return*/];
     });
 }); }).catch(function (error) { return console.log("TypeORM connection error: ", error); });
+/**
+ * export app
+ */
 module.exports = app;
 //# sourceMappingURL=index.js.map

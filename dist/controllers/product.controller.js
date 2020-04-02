@@ -60,8 +60,9 @@ var ProductController = /** @class */ (function () {
      * Creates an instance of product controller.
      * @param productRepository
      */
-    function ProductController(productRepository) {
+    function ProductController(productRepository, loggerService) {
         this.productRepository = productRepository;
+        this.loggerService = loggerService;
     }
     /**
      * Https get
@@ -87,6 +88,7 @@ var ProductController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_1 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_1));
                         res.status(400).json(error_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -118,6 +120,7 @@ var ProductController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_2 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_2));
                         res.status(400).json(error_2);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -149,6 +152,7 @@ var ProductController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_3 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_3));
                         res.status(400).json(error_3);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -185,6 +189,7 @@ var ProductController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_4 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_4));
                         res.status(400).json(error_4);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -218,6 +223,7 @@ var ProductController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_5 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_5));
                         res.status(400).json(error_5);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -263,7 +269,8 @@ var ProductController = /** @class */ (function () {
     ProductController = __decorate([
         inversify_express_utils_1.controller('/products'),
         __param(0, inversify_1.inject(types_1.default.IProductRepository)),
-        __metadata("design:paramtypes", [Object])
+        __param(1, inversify_1.inject(types_1.default.ILoggerService)),
+        __metadata("design:paramtypes", [Object, Object])
     ], ProductController);
     return ProductController;
 }());

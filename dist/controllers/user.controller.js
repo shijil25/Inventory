@@ -60,8 +60,9 @@ var UserController = /** @class */ (function () {
      * Creates an instance of user controller.
      * @param userRepository
      */
-    function UserController(userRepository) {
+    function UserController(userRepository, loggerService) {
         this.userRepository = userRepository;
+        this.loggerService = loggerService;
     }
     /**
      * Https get
@@ -87,6 +88,7 @@ var UserController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_1 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_1));
                         res.status(400).json(error_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -118,6 +120,7 @@ var UserController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_2 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_2));
                         res.status(400).json(error_2);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -151,6 +154,7 @@ var UserController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_3 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_3));
                         res.status(400).json(error_3);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -165,7 +169,7 @@ var UserController = /** @class */ (function () {
      */
     UserController.prototype.putUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, result, error_4;
+            var user, result, message, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -184,11 +188,14 @@ var UserController = /** @class */ (function () {
                             res.status(200).json(req.body);
                         }
                         else {
-                            res.status(400).json('Something went wrong');
+                            message = 'Something went wrong';
+                            this.loggerService.logError(message);
+                            res.status(400).json(message);
                         }
                         return [3 /*break*/, 3];
                     case 2:
                         error_4 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_4));
                         res.status(400).json(error_4);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -203,7 +210,7 @@ var UserController = /** @class */ (function () {
      */
     UserController.prototype.deleteUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, error_5;
+            var result, message, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -217,11 +224,14 @@ var UserController = /** @class */ (function () {
                             res.status(200).json('Successfully deleted!');
                         }
                         else {
-                            res.status(400).json('Something went wrong');
+                            message = 'Something went wrong';
+                            this.loggerService.logError(message);
+                            res.status(400).json(message);
                         }
                         return [3 /*break*/, 3];
                     case 2:
                         error_5 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_5));
                         res.status(400).json(error_5);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -267,7 +277,8 @@ var UserController = /** @class */ (function () {
     UserController = __decorate([
         inversify_express_utils_1.controller('/users'),
         __param(0, inversify_1.inject(types_1.default.IUserRepository)),
-        __metadata("design:paramtypes", [Object])
+        __param(1, inversify_1.inject(types_1.default.ILoggerService)),
+        __metadata("design:paramtypes", [Object, Object])
     ], UserController);
     return UserController;
 }());

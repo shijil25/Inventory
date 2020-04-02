@@ -62,9 +62,11 @@ var OrderController = /** @class */ (function () {
      * @param cartRepository
      * @param orderRepository
      */
-    function OrderController(cartRepository, orderRepository) {
+    function OrderController(cartRepository, orderRepository, eventPublishService, loggerService) {
         this.cartRepository = cartRepository;
         this.orderRepository = orderRepository;
+        this.eventPublishService = eventPublishService;
+        this.loggerService = loggerService;
     }
     /**
      * Https get
@@ -90,6 +92,7 @@ var OrderController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_1 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_1));
                         res.status(400).json(error_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -121,6 +124,7 @@ var OrderController = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 2:
                         error_2 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_2));
                         res.status(400).json(error_2);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -135,11 +139,11 @@ var OrderController = /** @class */ (function () {
      */
     OrderController.prototype.postOrder = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var order, user, result, error_3;
+            var order, user, result, newOrder, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _a.trys.push([0, 3, , 4]);
                         order = new order_entity_1.Order();
                         user = new user_entity_1.User();
                         user.UserId = req.body.userId;
@@ -147,13 +151,18 @@ var OrderController = /** @class */ (function () {
                         return [4 /*yield*/, this.orderRepository.create(order)];
                     case 1:
                         result = _a.sent();
-                        res.status(200).json(result);
-                        return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.orderRepository.findById(result[0].OrderId)];
                     case 2:
+                        newOrder = _a.sent();
+                        this.eventPublishService.publish(newOrder);
+                        res.status(200).json(result);
+                        return [3 /*break*/, 4];
+                    case 3:
                         error_3 = _a.sent();
+                        this.loggerService.logError(JSON.stringify(error_3));
                         res.status(400).json(error_3);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -183,7 +192,9 @@ var OrderController = /** @class */ (function () {
         inversify_express_utils_1.controller('/orders'),
         __param(0, inversify_1.inject(types_1.default.ICartRepository)),
         __param(1, inversify_1.inject(types_1.default.IOrderRepository)),
-        __metadata("design:paramtypes", [Object, Object])
+        __param(2, inversify_1.inject(types_1.default.IEventPublishService)),
+        __param(3, inversify_1.inject(types_1.default.ILoggerService)),
+        __metadata("design:paramtypes", [Object, Object, Object, Object])
     ], OrderController);
     return OrderController;
 }());

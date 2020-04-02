@@ -8,11 +8,11 @@ import {ConnectionOptions} from "typeorm";
 
  export let dbOptions: ConnectionOptions = {
     type: "mssql",
-    host: "SPANNIAN01\\MSSQLSERVER1",
-    port: 8391,
-    username: "sa",
-    password: "shijil@123",
-    database: "Inventory",
+    host: process.env.HOST,
+    port: +process.env.DB_PORT,
+    username: process.env.USER_NAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE_NAME,
     entities: [User , Product, Cart, Order, OrderItem],
     synchronize: true,
 }

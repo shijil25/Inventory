@@ -1,7 +1,7 @@
 import { getManager } from "typeorm";
 import { injectable } from "inversify";
 import { Order } from './../entities/order.entity';
-import { IOrderRepository } from './iorder.repository';
+import { IOrderRepository } from '../interfaces/iorder.repository';
 
 /**
  * Order repository
