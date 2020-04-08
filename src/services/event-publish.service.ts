@@ -18,6 +18,7 @@ export class EventPublishService implements IEventPublishService {
         const queueName = process.env.QUEUE_NAME;
         const connectionString = process.env.AZURE_SERVICE_BUS;
         var serviceBusService = azure.createServiceBusService(connectionString);
+        let thisClass = this;
 
         try {
             const message= {
@@ -25,17 +26,14 @@ export class EventPublishService implements IEventPublishService {
             };
             
             serviceBusService.sendQueueMessage(queueName, message, function(error){
-                if(!error) {
-                    
-                } else {
-                    console.log(error);
+                if(error) {
+                    thisClass.logService.logError(error.detail);
                 }
             });
         } 
         catch(error)
         {
             this.logService.logError(JSON.stringify(error));
-            console.log(error);
         }
     }
 }

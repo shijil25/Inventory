@@ -155,7 +155,7 @@ var OrderController = /** @class */ (function () {
                     case 2:
                         newOrder = _a.sent();
                         this.eventPublishService.publish(newOrder);
-                        res.status(200).json(result);
+                        res.status(200).json(newOrder);
                         return [3 /*break*/, 4];
                     case 3:
                         error_3 = _a.sent();

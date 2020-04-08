@@ -56,26 +56,24 @@ var EventPublishService = /** @class */ (function () {
     }
     EventPublishService.prototype.publish = function (order) {
         return __awaiter(this, void 0, void 0, function () {
-            var queueName, connectionString, serviceBusService, message;
+            var queueName, connectionString, serviceBusService, thisClass, message;
             return __generator(this, function (_a) {
                 queueName = process.env.QUEUE_NAME;
                 connectionString = process.env.AZURE_SERVICE_BUS;
                 serviceBusService = azure.createServiceBusService(connectionString);
+                thisClass = this;
                 try {
                     message = {
                         body: JSON.stringify(order)
                     };
                     serviceBusService.sendQueueMessage(queueName, message, function (error) {
-                        if (!error) {
-                        }
-                        else {
-                            console.log(error);
+                        if (error) {
+                            thisClass.logService.logError(error.detail);
                         }
                     });
                 }
                 catch (error) {
                     this.logService.logError(JSON.stringify(error));
-                    console.log(error);
                 }
                 return [2 /*return*/];
             });

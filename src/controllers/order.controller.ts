@@ -94,7 +94,7 @@ export class OrderController implements interfaces.Controller {
             } = await this.orderRepository.create(order);
             const newOrder = await this.orderRepository.findById(result[0].OrderId);
             this.eventPublishService.publish(newOrder);
-            res.status(200).json(result);
+            res.status(200).json(newOrder);
         } catch(error) {
             this.loggerService.logError(JSON.stringify(error));
             res.status(400).json(error);
