@@ -58,8 +58,8 @@ var EventPublishService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var queueName, connectionString, serviceBusService, message;
             return __generator(this, function (_a) {
-                queueName = "inventoryqueue";
-                connectionString = "Endpoint=sb://inventorysystem.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=mRbRM6AZDmEgBm0UAE5dnPXuo1Cf+WuKFU61qthML+8=";
+                queueName = process.env.QUEUE_NAME;
+                connectionString = process.env.AZURE_SERVICE_BUS;
                 serviceBusService = azure.createServiceBusService(connectionString);
                 try {
                     message = {

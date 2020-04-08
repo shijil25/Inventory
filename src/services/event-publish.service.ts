@@ -15,8 +15,8 @@ export class EventPublishService implements IEventPublishService {
     }
 
     async publish(order : Order) {
-        const queueName = "inventoryqueue";
-        const connectionString = "Endpoint=sb://inventorysystem.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=mRbRM6AZDmEgBm0UAE5dnPXuo1Cf+WuKFU61qthML+8=";
+        const queueName = process.env.QUEUE_NAME;
+        const connectionString = process.env.AZURE_SERVICE_BUS;
         var serviceBusService = azure.createServiceBusService(connectionString);
 
         try {
