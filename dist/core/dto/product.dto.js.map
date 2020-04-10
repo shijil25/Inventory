@@ -1,0 +1,1 @@
+{"version":3,"file":"product.dto.js","sourceRoot":"","sources":["../../../src/core/dto/product.dto.ts"],"names":[],"mappings":";;AAAA;IACI,oBACO,MAAc,EACd,IAAY,EACZ,WAAmB,EACnB,KAAa,EACb,SAAiB;QAJjB,WAAM,GAAN,MAAM,CAAQ;QACd,SAAI,GAAJ,IAAI,CAAQ;QACZ,gBAAW,GAAX,WAAW,CAAQ;QACnB,UAAK,GAAL,KAAK,CAAQ;QACb,cAAS,GAAT,SAAS,CAAQ;IAAE,CAAC;IAC/B,iBAAC;AAAD,CAAC,AAPD,IAOC;AAPY,gCAAU"}

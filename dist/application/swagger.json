@@ -1,0 +1,292 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "version": "1.0.1",
+        "title": "Inventory API.....",
+        "description": "Inventory API using Node JS",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080/api/",
+            "description": "Local Server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Products",
+            "description": "API for Products in the system"
+        },
+        {
+            "name": "Carts",
+            "description": "API for Carts in the system"
+        },
+        {
+            "name": "Orders",
+            "description": "API for Orders in the system"
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all Products in system",
+                "responses": {}
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create a new product in system",
+                "requestBody": {
+                    "description": "Product Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {}
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get product with given ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Product with id"
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "summary": "Update product with given ID",
+                "tags": [
+                    "Products"
+                ],
+                "requestBody": {
+                    "description": "Product Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Product with new values of properties"
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "summary": "Delete product with given ID",
+                "tags": [
+                    "Products"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Delete product with id"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/carts": {
+            "post": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Create a new Cart in system",
+                "requestBody": {
+                    "description": "Cart Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Cart"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {}
+            }
+        },
+        "/carts/{id}": {
+            "get": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Get cart with given ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Cart with id"
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "summary": "Update cart with given ID",
+                "tags": [
+                    "Carts"
+                ],
+                "requestBody": {
+                    "description": "Cart Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Cart"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Cart with new values of properties"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/orders": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create a new order in system",
+                "requestBody": {
+                    "description": "Order Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/Order"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {}
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get order with given ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Order with id"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/orders/CustomerOrder/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get order with given Customer ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Order with customer id"
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "Product": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "productCount": {
+                    "type": "number"
+                }
+            }
+        },
+        "Cart": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "number"
+                },
+                "productId": {
+                    "type": "number"
+                },
+                "quantity": {
+                    "type": "number"
+                }
+            }
+        },
+        "Order": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}
