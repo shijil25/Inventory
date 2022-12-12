@@ -9,7 +9,7 @@
     "@types/node": "^12.12.31",
     "azure": "^2.3.1-preview",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "faker": "^4.1.0",
     "inversify": "^5.0.1",
     "inversify-express-utils": "^6.3.2",
